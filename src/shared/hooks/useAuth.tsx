@@ -5,27 +5,46 @@ import {
   type ReactNode,
   useContext,
 } from "react";
-import type { AuthUserDto } from "../dtos/auth_user.dto";
+import type { LoginResponseData } from "../../features/auth/login/types/response.dto";
 import { UncatchException } from "../exceptions/exception";
+import { storageService } from "@shared/services/storage.service";
 
 interface AuthContext {
-  user: AuthUserDto | null;
+  auth: LoginResponseData | null;
+  setAuth: (auth: LoginResponseData) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContext>({
-  user: null,
+  auth: null,
   logout: () => {},
+  setAuth: () => {},
 });
 
 function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthUserDto | null>();
-  const logout = useCallback(() => {}, []);
+  const [auth, _setAuth] = useState<LoginResponseData | null>(
+    storageService.getLogin(),
+  );
+
+  const setAuth = useCallback(
+    (auth: LoginResponseData | null) => {
+      _setAuth(auth);
+      storageService.saveLogin(auth);
+    },
+    [_setAuth],
+  );
+
+  const logout = useCallback(() => {
+    setAuth(null);
+    storageService.saveLogin(null);
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
-        user: user ?? null,
+        auth: auth ?? null,
         logout: logout,
+        setAuth: setAuth,
       }}
     >
       {children}

@@ -2,11 +2,18 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./App.css";
 import { routeTree } from "./routeTree.gen";
 import { AuthProvider, useAuth } from "./shared/hooks/useAuth";
+import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <AuthProvider>
-      <RouterApp></RouterApp>
+      <QueryClientProvider client={queryClient}>
+        <RouterApp />
+      </QueryClientProvider>
+      <ToastContainer />
     </AuthProvider>
   );
 }
@@ -20,7 +27,7 @@ export const router = createRouter({
 });
 
 function RouterApp() {
-  const { user } = useAuth();
+  const { auth: user } = useAuth();
   return (
     <RouterProvider
       context={{

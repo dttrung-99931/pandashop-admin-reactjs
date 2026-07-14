@@ -1,9 +1,9 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import * as React from "react";
-import type { AuthUserDto } from "../shared/dtos/auth_user.dto";
+import type { LoginResponseData } from "../features/auth/login/types/response.dto";
 
 export type AppRouteContext = {
-  user: AuthUserDto | null;
+  user: LoginResponseData | null;
 };
 
 export const Route = createRootRouteWithContext<AppRouteContext>()({
