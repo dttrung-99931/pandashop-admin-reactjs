@@ -1,3 +1,5 @@
+import { SideBar } from "@shared/components/Layout/SideBar";
+import { TopBar } from "@shared/components/Layout/TopBar";
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app")({
@@ -12,5 +14,15 @@ export const Route = createFileRoute("/_app")({
 });
 
 function RouteComponent() {
-  return <Outlet></Outlet>;
+  return (
+    <div className="flex h-full w-full">
+      <SideBar></SideBar>
+      <div className="flex-1 flex flex-col">
+        <TopBar></TopBar>
+        <div className="flex-1">
+          <Outlet></Outlet>
+        </div>
+      </div>
+    </div>
+  );
 }

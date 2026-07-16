@@ -32,3 +32,7 @@ export function showErrorToast(message: string, autoCloseSecs: number = 3) {
 export function showWarningToast(message: string, autoCloseSecs: number = 3) {
   showToast(message, { type: "warning", autoCloseSecs });
 }
+
+export function showCommingSoonToast(autoCloseSecs: number = 3) {
+  showToast("Coming soon!", { type: "default", autoCloseSecs });
+}

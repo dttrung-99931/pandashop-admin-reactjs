@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_auth/login")({
   beforeLoad: ({ context, location }) => {
     if (context.user && location.pathname === "/login") {
       throw redirect({
-        to: "/home",
+        to: "/users",
       });
     }
   },

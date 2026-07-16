@@ -9,7 +9,7 @@ interface IPageHeaderProps {
 export const PageHeader: FC<IPageHeaderProps> = ({ actions, title }) => {
   const router = useRouter();
   return (
-    <div className="px-6 py-4 flex w-full relative top-0 bg-white items-center stickly space-x-4">
+    <div className="px-8 py-6 flex w-full relative top-0 bg-white items-center stickly space-x-4">
       <button
         className="text-lg cursor-pointer"
         onClick={() => {
@@ -21,7 +21,7 @@ export const PageHeader: FC<IPageHeaderProps> = ({ actions, title }) => {
         &lt;
       </button>
 
-      <h1 className="text-xl font-semibold flex-1">{title}</h1>
+      <h1 className="text-xl font-medium flex-1">{title}</h1>
       {actions}
     </div>
   );

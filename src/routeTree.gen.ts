@@ -13,7 +13,9 @@ import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
-import { Route as AppHomeRouteImport } from './routes/_app/home'
+import { Route as AppUsersRouteImport } from './routes/_app/users'
+import { Route as AppProductCategoriesRouteImport } from './routes/_app/product-categories'
+import { Route as AppPanMusicsRouteImport } from './routes/_app/pan-musics'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/_auth',
@@ -33,36 +35,60 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AppHomeRoute = AppHomeRouteImport.update({
-  id: '/home',
-  path: '/home',
+const AppUsersRoute = AppUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppProductCategoriesRoute = AppProductCategoriesRouteImport.update({
+  id: '/product-categories',
+  path: '/product-categories',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppPanMusicsRoute = AppPanMusicsRouteImport.update({
+  id: '/pan-musics',
+  path: '/pan-musics',
   getParentRoute: () => AppRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
-  '/home': typeof AppHomeRoute
+  '/pan-musics': typeof AppPanMusicsRoute
+  '/product-categories': typeof AppProductCategoriesRoute
+  '/users': typeof AppUsersRoute
   '/login': typeof AuthLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
-  '/home': typeof AppHomeRoute
+  '/pan-musics': typeof AppPanMusicsRoute
+  '/product-categories': typeof AppProductCategoriesRoute
+  '/users': typeof AppUsersRoute
   '/login': typeof AuthLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteRouteWithChildren
   '/_auth': typeof AuthRouteRouteWithChildren
-  '/_app/home': typeof AppHomeRoute
+  '/_app/pan-musics': typeof AppPanMusicsRoute
+  '/_app/product-categories': typeof AppProductCategoriesRoute
+  '/_app/users': typeof AppUsersRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/home' | '/login'
+  fullPaths: '/' | '/pan-musics' | '/product-categories' | '/users' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/login'
-  id: '__root__' | '/_app' | '/_auth' | '/_app/home' | '/_auth/login' | '/_app/'
+  to: '/' | '/pan-musics' | '/product-categories' | '/users' | '/login'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_auth'
+    | '/_app/pan-musics'
+    | '/_app/product-categories'
+    | '/_app/users'
+    | '/_auth/login'
+    | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -100,23 +126,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_app/home': {
-      id: '/_app/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof AppHomeRouteImport
+    '/_app/users': {
+      id: '/_app/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AppUsersRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/product-categories': {
+      id: '/_app/product-categories'
+      path: '/product-categories'
+      fullPath: '/product-categories'
+      preLoaderRoute: typeof AppProductCategoriesRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/pan-musics': {
+      id: '/_app/pan-musics'
+      path: '/pan-musics'
+      fullPath: '/pan-musics'
+      preLoaderRoute: typeof AppPanMusicsRouteImport
       parentRoute: typeof AppRouteRoute
     }
   }
 }
 
 interface AppRouteRouteChildren {
-  AppHomeRoute: typeof AppHomeRoute
+  AppPanMusicsRoute: typeof AppPanMusicsRoute
+  AppProductCategoriesRoute: typeof AppProductCategoriesRoute
+  AppUsersRoute: typeof AppUsersRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppHomeRoute: AppHomeRoute,
+  AppPanMusicsRoute: AppPanMusicsRoute,
+  AppProductCategoriesRoute: AppProductCategoriesRoute,
+  AppUsersRoute: AppUsersRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
