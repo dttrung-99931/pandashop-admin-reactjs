@@ -15,16 +15,18 @@ export type TableColumn<T extends BaseTableItemType> = {
 interface ITableProps<T extends BaseTableItemType> {
   data: T[];
   columns: TableColumn<T>[];
+  onClick?: (item: T) => void;
 }
 
 export function Table<T extends BaseTableItemType>({
   columns,
   data,
+  onClick,
 }: ITableProps<T>) {
   return (
     <table className="p-4 w-full">
       <TableHeader columns={columns} />
-      <TableRows columns={columns} data={data} />
+      <TableRows columns={columns} data={data} onClick={onClick} />
     </table>
   );
 }

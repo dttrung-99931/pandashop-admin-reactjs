@@ -9,7 +9,7 @@ interface IPageHeaderProps {
 export const PageHeader: FC<IPageHeaderProps> = ({ actions, title }) => {
   const router = useRouter();
   return (
-    <div className="px-8 py-6 flex w-full relative top-0 bg-white items-center stickly space-x-4">
+    <div className="px-8 py-5 mb-1 flex w-full relative top-0 bg-white items-center stickly space-x-4">
       <button
         className="text-lg cursor-pointer"
         onClick={() => {

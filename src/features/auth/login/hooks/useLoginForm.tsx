@@ -38,7 +38,7 @@ export function useLoginForm() {
         setAuth(res.data);
         showMessageToast("Login successfully!");
         navigate({
-          to: "/home",
+          to: "/pan-musics",
         });
       } else {
         showErrorToast("Login failed!");

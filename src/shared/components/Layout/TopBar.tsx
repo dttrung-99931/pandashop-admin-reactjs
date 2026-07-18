@@ -5,7 +5,7 @@ interface ITopBarProps {}
 
 export const TopBar: FC<ITopBarProps> = () => {
   return (
-    <div className="h-12 w-full bg-primary/40 flex justify-end items-center px-4">
+    <div className="h-14 w-full bg-primary/40 flex justify-end items-center px-4">
       <OverlayMenu
         menu={
           <ul className="bg-white p-4">

@@ -28,7 +28,7 @@ export const LoginPage: FC<ILoginPageProps> = () => {
                   <Input
                     placeholder="Username"
                     value={field.state.value}
-                    onChange={field.handleChange}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
                   />
                 </Field>
@@ -40,7 +40,7 @@ export const LoginPage: FC<ILoginPageProps> = () => {
                   <Input
                     placeholder="Password"
                     value={field.state.value}
-                    onChange={field.handleChange}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
                     type="password"
                   />
