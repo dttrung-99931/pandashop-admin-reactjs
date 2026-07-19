@@ -3,3 +3,13 @@ export type BaseResponse<T> = {
   statusCode: number;
   success: boolean;
 };
+
+export type UpdateResponse = BaseResponse<any>;
+
+export type CreateResponseData = {
+  id: number | string;
+};
+
+export type CreateResponse = BaseResponse<CreateResponseData>;
+
+export type CreateOrUpdateResponse = UpdateResponse | CreateResponse;

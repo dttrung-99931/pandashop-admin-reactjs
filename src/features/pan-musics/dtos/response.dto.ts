@@ -12,3 +12,6 @@ export type PanMusicItemResponse = {
 export type GetPanMusicsRequest = {
   q?: string;
 };
+
+export type PanMusicDetailResponse = BaseResponse<PanMusicItemResponse>;
+

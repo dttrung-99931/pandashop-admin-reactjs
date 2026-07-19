@@ -17,6 +17,7 @@ export const PanMusicDetailModal: FC<IPanMusicDetailModalProps> = ({
   editId,
   onSuccess,
 }) => {
+  const isEdit = editId !== undefined;
   const { form, isLoading } = usePanMusicForm({
     editId,
     onError: (ex) => {
@@ -44,6 +45,7 @@ export const PanMusicDetailModal: FC<IPanMusicDetailModalProps> = ({
           {(field) => (
             <Field field={field}>
               <Input
+                value={field.state.value}
                 placeholder="Name"
                 onChange={(e) => field.handleChange(e.target.value)}
                 onBlur={field.handleBlur}
@@ -71,8 +73,9 @@ export const PanMusicDetailModal: FC<IPanMusicDetailModalProps> = ({
         <form.Subscribe
           selector={(state) =>
             state.canSubmit &&
-            // User inputted
-            state.isDirty
+            (isEdit ||
+              // When create the form must has some changes
+              state.isDirty)
           }
         >
           {(canSubmit) => (
