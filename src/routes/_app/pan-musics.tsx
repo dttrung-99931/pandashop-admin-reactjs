@@ -1,4 +1,4 @@
-import { PanMusicsPage } from "@features/pan-musics/pages/pan-musics.page";
+import { PanMusicsPage } from "@features/pan-musics/pages/PanMusicsPage";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app/pan-musics")({

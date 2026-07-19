@@ -24,7 +24,11 @@ export const PanMusicDetailModal: FC<IPanMusicDetailModalProps> = ({
       showErrorToast(ex.message);
     },
     onSuccess: () => {
-      showMessageToast("Panmusic created successfully");
+      showMessageToast(
+        isEdit
+          ? "Panmusic updated successfully"
+          : "Panmusic created successfully",
+      );
       onSuccess?.();
     },
   });
@@ -85,7 +89,7 @@ export const PanMusicDetailModal: FC<IPanMusicDetailModalProps> = ({
               isDisabled={!canSubmit}
               isSubmit
             >
-              Create
+              {isEdit ? "Update" : "Create"}
             </Button>
           )}
         </form.Subscribe>

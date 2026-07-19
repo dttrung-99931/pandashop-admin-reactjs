@@ -4,11 +4,12 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { Loading } from "../Loading";
 
 const ButtonVariants = tv({
-  base: cn("rounded-md border-none text-white", "active:scale-95 select-none"),
+  base: cn("rounded-md border-none", "active:scale-95 select-none"),
   variants: {
     type: {
-      primary: "bg-primary",
-      secondary: "bg-secondary",
+      primary: "bg-primary text-white",
+      secondary: "bg-secondary text-white",
+      icon: "",
     },
     size: {
       md: "px-4 py-1",
@@ -40,7 +41,11 @@ export const Button: FC<IButtonProps> = ({
   type,
   isDisabled,
   isLoading,
+  size,
 }) => {
+  if (!size && type === "icon") {
+    size = "sm";
+  }
   const disabled = isLoading || isDisabled;
   return (
     <button
@@ -48,6 +53,7 @@ export const Button: FC<IButtonProps> = ({
       className={cn(
         ButtonVariants({
           type: type,
+          size: size,
         }),
         disabled && "opacity-60 active:scale-100",
         !isLoading && "cursor-pointer",

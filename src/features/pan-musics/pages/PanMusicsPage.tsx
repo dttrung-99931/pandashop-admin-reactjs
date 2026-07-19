@@ -2,11 +2,13 @@ import { Audio } from "@shared/components/Audio";
 import { Button } from "@shared/components/Buttton";
 import { Page } from "@shared/components/Page";
 import { Table } from "@shared/components/Table";
-import { Edit } from "lucide-react";
+import { showErrorToast } from "@utils/toast";
+import { Edit, Trash } from "lucide-react";
 import { useCallback, useState, type FC } from "react";
 import type { PanMusicItemResponse } from "../dtos/response.dto";
+import { useDeletePanMusic } from "../hooks/useDeletePanmusic";
 import { useGetPanMusics } from "../hooks/useGetPanMusics";
-import { PanMusicDetailModal } from "./pan-music-detail.modal";
+import { PanMusicDetailModal } from "./PanMusicDetailModal";
 
 interface IUsersPageProps {}
 
@@ -14,6 +16,14 @@ export const PanMusicsPage: FC<IUsersPageProps> = () => {
   const { data, isLoading, refetch } = useGetPanMusics({});
   const [editId, setEditId] = useState<number | undefined>(undefined);
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
+  const { handleDelete } = useDeletePanMusic({
+    onError: (ex) => {
+      showErrorToast(ex.message);
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   const closeModal = useCallback(() => {
     if (editId) {
@@ -40,7 +50,7 @@ export const PanMusicsPage: FC<IUsersPageProps> = () => {
             columns={[
               {
                 title: "Id",
-                flex: 4,
+                flex: 2,
                 renderCell: (panMusic) => <span>{panMusic.id}</span>,
               },
               {
@@ -65,12 +75,18 @@ export const PanMusicsPage: FC<IUsersPageProps> = () => {
                 title: "Edit",
                 flex: 1,
                 renderCell: (panMusic) => (
-                  <button
-                    className="cursor-pointer"
-                    onClick={() => setEditId(panMusic.id)}
-                  >
+                  <Button type="icon" onClick={() => setEditId(panMusic.id)}>
                     <Edit size={20} />
-                  </button>
+                  </Button>
+                ),
+              },
+              {
+                title: "Delete",
+                flex: 1,
+                renderCell: (panMusic) => (
+                  <Button type="icon" onClick={() => handleDelete(panMusic)}>
+                    <Trash size={20} />
+                  </Button>
                 ),
               },
             ]}

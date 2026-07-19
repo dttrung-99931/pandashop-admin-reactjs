@@ -10,6 +10,7 @@ import type {
 } from "../dtos/request.dto";
 import type {
   CreateResponse,
+  DeleteResponse,
   UpdateResponse,
 } from "@shared/dtos/base/base.response";
 
@@ -56,6 +57,11 @@ class PanMusicsService {
     const response = await api.get<PanMusicDetailResponse>(
       `v1/PanMusics/${id}`,
     );
+    return response.data;
+  }
+
+  async delete(id: number): Promise<DeleteResponse> {
+    const response = await api.delete<DeleteResponse>(`v1/PanMusics/${id}`);
     return response.data;
   }
 }

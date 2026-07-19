@@ -13,3 +13,5 @@ export type CreateResponseData = {
 export type CreateResponse = BaseResponse<CreateResponseData>;
 
 export type CreateOrUpdateResponse = UpdateResponse | CreateResponse;
+
+export type DeleteResponse = BaseResponse<any>;

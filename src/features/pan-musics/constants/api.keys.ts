@@ -5,4 +5,5 @@ export const panMusicApiKeys = {
   getPanMusicById: (id?: number) => ["getPanMusicById", id],
   createPanMusic: () => ["createPanMusic"],
   updatePanMusic: (id?: number) => ["updatePanMusic", id],
+  deletePanMusic: () => ["deletePanMusic"],
 };

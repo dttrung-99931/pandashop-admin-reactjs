@@ -1,5 +1,6 @@
 import { Pause, Play } from "lucide-react";
 import { useRef, useState, type FC } from "react";
+import { Button } from "../Buttton";
 
 interface IAudioProps {
   src: string;
@@ -16,15 +17,19 @@ export const Audio: FC<IAudioProps> = ({ src }) => {
       <audio ref={ref} src={src}>
         Your browser does not support the audio element.
       </audio>
-      <button
-        className="cursor-pointer"
+      <Button
+        type="icon"
         onClick={() => {
-          isPlaying ? ref.current?.pause() : ref.current?.play();
+          if (isPlaying) {
+            ref.current?.pause();
+          } else {
+            ref.current?.play();
+          }
           setIsPlaying(!isPlaying);
         }}
       >
         {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-      </button>
+      </Button>
     </div>
   );
 };
